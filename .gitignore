@@ -26,6 +26,10 @@ venv/
 # y el proyecto exige no perderlos ni reentrenarlos sin justificación.
 !q_table_independiente_*.pkl
 
+# Modelos de la variante v2 (Etapa 3, discretizacion de cola de 5 niveles):
+# tambien se versionan como respaldo/evidencia del experimento.
+!q_table_v2_*.pkl
+
 # ==================================================
 # SALIDAS TEMPORALES DE SIMULACIONES DE SUMO
 # ==================================================

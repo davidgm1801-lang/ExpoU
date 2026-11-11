@@ -68,7 +68,24 @@ TIEMPO_MAXIMO_VERDE = 50
 # Binario SIN interfaz grafica: evaluacion rapida.
 SUMO = sumolib.checkBinary("sumo")
 
-ARCHIVO_RESULTADOS = "evaluacion_etapa2.csv"
+# ==================================================
+# VERSION DE MODELO A EVALUAR
+# ==================================================
+# Variable de entorno VERSION_MODELO: "v1" (por defecto) o "v2".
+#   v1 -> modelos q_table_independiente_<id>.pkl, cola de 3 niveles [0,3]
+#   v2 -> modelos q_table_v2_<id>.pkl,            cola de 5 niveles [0,2,5,10]
+# El brazo baseline es identico en ambos casos (control original de SUMO);
+# lo unico que cambia es que modelos usa el brazo IA.
+VERSION_MODELO = os.environ.get("VERSION_MODELO", "v1").lower()
+
+if VERSION_MODELO == "v2":
+    PREFIJO_MODELO = "q_table_v2_"
+    UMBRALES_COLA = [0, 2, 5, 10]
+    ARCHIVO_RESULTADOS = "evaluacion_etapa2_v2.csv"
+else:
+    PREFIJO_MODELO = "q_table_independiente_"
+    UMBRALES_COLA = [0, 3]
+    ARCHIVO_RESULTADOS = "evaluacion_etapa2.csv"
 
 # Carpeta temporal para las salidas por corrida.
 DIR_SALIDAS = "salidas_evaluacion"
@@ -103,7 +120,7 @@ SEMAFOROS = {
 }
 
 ARCHIVOS_MODELO = {
-    tls_id: f"q_table_independiente_{tls_id}.pkl"
+    tls_id: f"{PREFIJO_MODELO}{tls_id}.pkl"
     for tls_id in SEMAFOROS
 }
 
@@ -121,7 +138,7 @@ import pickle
 class AgenteEvaluacion:
     """Carga una tabla Q entrenada y la explota sin exploracion."""
 
-    def __init__(self, ruta_modelo):
+    def __init__(self, ruta_modelo, queue_thresholds=None):
         with open(ruta_modelo, "rb") as archivo:
             datos = pickle.load(archivo)
 
@@ -132,14 +149,19 @@ class AgenteEvaluacion:
                 f"La tabla Q de '{ruta_modelo}' esta vacia."
             )
 
-    @staticmethod
-    def clasificar_cola(cola):
-        if cola == 0:
-            return 0
-        elif cola <= 3:
-            return 1
-        else:
-            return 2
+        # Umbrales de discretizacion de la cola. Deben coincidir con los
+        # usados al ENTRENAR el modelo que se esta evaluando.
+        #   v1 (original): [0, 3]          -> 3 niveles
+        #   v2 (Etapa 3):  [0, 2, 5, 10]   -> 5 niveles
+        if queue_thresholds is None:
+            queue_thresholds = [0, 3]
+        self.queue_thresholds = queue_thresholds
+
+    def clasificar_cola(self, cola):
+        for i, limite in enumerate(self.queue_thresholds):
+            if cola <= limite:
+                return i
+        return len(self.queue_thresholds)
 
     def get_state(self, cola_a, cola_b, grupo_verde):
         return (
@@ -343,7 +365,10 @@ def ejecutar_corrida(brazo, semilla, prefijo_salida):
     agentes = {}
     if brazo == "ia":
         for tls_id in SEMAFOROS:
-            agentes[tls_id] = AgenteEvaluacion(ARCHIVOS_MODELO[tls_id])
+            agentes[tls_id] = AgenteEvaluacion(
+                ARCHIVOS_MODELO[tls_id],
+                queue_thresholds=UMBRALES_COLA,
+            )
 
     controles = {tls_id: nuevo_control() for tls_id in SEMAFOROS}
 
@@ -504,11 +529,15 @@ CAMPOS_CSV = [
 
 def main():
     print("=" * 64)
-    print("EVALUACION ETAPA 2 - Baseline (SUMO) vs IA (5 agentes)")
+    print("EVALUACION - Baseline (SUMO) vs IA (5 agentes)")
     print("=" * 64)
+    print(f"Version de modelo IA: {VERSION_MODELO} "
+          f"(umbrales de cola {UMBRALES_COLA})")
+    print(f"Modelos: {PREFIJO_MODELO}<id>.pkl")
     print(f"Semillas: {SEMILLAS}")
     print(f"Duracion por corrida: {DURACION} s | Escala: {ESCALA_TRAFICO}")
     print(f"Total de corridas: {len(SEMILLAS) * 2}")
+    print(f"Salida: {ARCHIVO_RESULTADOS}")
 
     os.makedirs(DIR_SALIDAS, exist_ok=True)
 
