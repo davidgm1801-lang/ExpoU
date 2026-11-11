@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-11-04T14:25:54.462278-05:00 by Eclipse SUMO netconvert 1.28.0
+<netconvertConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <type-files value="${SUMO_HOME}\data\typemap\osmNetconvert.typ.xml,${SUMO_HOME}\data\typemap\osmNetconvertUrbanDe.typ.xml,${SUMO_HOME}\data\typemap\osmNetconvertPedestrians.typ.xml,${SUMO_HOME}\data\typemap\osmNetconvertShips.typ.xml,${SUMO_HOME}\data\typemap\osmNetconvertBicycle.typ.xml,${SUMO_HOME}\data\typemap\osmNetconvertAerialway.typ.xml"/>
+        <osm-files value="osm_bbox.osm.xml.gz"/>
+    </input>
+
+    <output>
+        <output-file value="osm.net.xml.gz"/>
+        <output.street-names value="true"/>
+        <output.original-names value="true"/>
+        <ptstop-output value="osm_stops.add.xml"/>
+        <ptline-output value="osm_ptlines.xml"/>
+        <ptline-clean-up value="true"/>
+    </output>
+
+    <projection>
+        <proj value="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs"/>
+    </projection>
+
+    <processing>
+        <geometry.remove value="true"/>
+    </processing>
+
+    <tls_building>
+        <tls.discard-simple value="true"/>
+        <tls.join value="true"/>
+        <tls.guess-signals value="true"/>
+        <tls.default-type value="actuated"/>
+    </tls_building>
+
+    <ramp_guessing>
+        <ramps.guess value="true"/>
+    </ramp_guessing>
+
+    <edge_removal>
+        <keep-edges.by-vclass value="passenger,bus,tram,rail_urban,subway,cable_car,rail"/>
+    </edge_removal>
+
+    <junctions>
+        <junctions.join value="true"/>
+    </junctions>
+
+    <pedestrian>
+        <crossings.guess value="true"/>
+    </pedestrian>
+
+    <railway>
+        <railway.topology.repair value="true"/>
+    </railway>
+
+    <formats>
+        <osm.bike-access value="true"/>
+        <osm.sidewalks value="true"/>
+    </formats>
+
+    <report>
+        <verbose value="true"/>
+    </report>
+
+</netconvertConfiguration>
+-->
+
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+    <busStop id="14241026246" name="Museo del Oro" lane="242708699#0_0" startPos="51.05" endPos="66.05" friendlyPos="true" lines="F23">
+        <access lane="1016264367#0_0" pos="52.44" length="292.25" friendlyPos="1"/>
+        <access lane="24456495#0_0" pos="0.00" length="148.83" friendlyPos="1"/>
+    </busStop>
+    <busStop id="14241026247" name="Museo del Oro" lane="242708697#1_0" startPos="173.54" endPos="188.54" friendlyPos="true" lines="J23 J70">
+        <access lane="1016264367#0_0" pos="51.31" length="275.70" friendlyPos="1"/>
+        <access lane="24456495#0_0" pos="0.00" length="133.95" friendlyPos="1"/>
+    </busStop>
+    <busStop id="14241026248" name="Las Aguas" lane="1222853446#0_0" startPos="116.23" endPos="131.23" friendlyPos="true" lines="F23 J23 J70"/>
+    <busStop id="14241026249" name="Universidades" lane="532780094#0_0" startPos="46.48" endPos="61.48" friendlyPos="true" lines="B74 C73">
+        <access lane="-24456474#1_0" pos="157.46" length="161.20" friendlyPos="1"/>
+        <access lane="-509352038#1_0" pos="5.45" length="188.36" friendlyPos="1"/>
+        <access lane="1222853446#0_0" pos="162.88" length="203.72" friendlyPos="1"/>
+        <access lane="24456474#0_0" pos="0.00" length="148.65" friendlyPos="1"/>
+        <access lane="509352038#0_0" pos="0.00" length="189.60" friendlyPos="1"/>
+    </busStop>
+    <busStop id="14241026250" name="Universidades" lane="404646506#3_0" startPos="118.67" endPos="133.67" friendlyPos="true" lines="H76 J76 1">
+        <access lane="-24456474#1_0" pos="157.46" length="70.68" friendlyPos="1"/>
+        <access lane="24456474#0_0" pos="0.00" length="60.07" friendlyPos="1"/>
+    </busStop>
+    <busStop id="14241026251" name="Universidades" lane="532780094#0_0" startPos="113.14" endPos="128.14" friendlyPos="true" lines="D24 1">
+        <access lane="-24456474#1_0" pos="157.46" length="62.23" friendlyPos="1"/>
+        <access lane="24456474#0_0" pos="0.00" length="50.05" friendlyPos="1"/>
+    </busStop>
+    <busStop id="14244133143" name="Las Nieves" lane="509352046#13_0" startPos="123.46" endPos="138.46" friendlyPos="true"/>
+    <busStop id="14244133144" name="Las Nieves" lane="509352045#0_0" startPos="436.72" endPos="451.72" friendlyPos="true"/>
+    <busStop id="14244133145" name="Las Nieves" lane="509352046#13_0" startPos="44.04" endPos="59.04" friendlyPos="true"/>
+    <busStop id="14244133146" name="Las Nieves" lane="509352045#0_0" startPos="514.30" endPos="529.30" friendlyPos="true"/>
+    <busStop id="14244133147" name="San Diego" lane="509352046#0_0" startPos="149.34" endPos="164.34" friendlyPos="true"/>
+    <busStop id="14244133148" name="San Diego" lane="509352045#10_0" startPos="138.97" endPos="153.97" friendlyPos="true"/>
+    <busStop id="14244133149" name="San Diego" lane="509352046#0_0" startPos="10.20" endPos="25.20" friendlyPos="true"/>
+    <busStop id="2394674234" name="Universidades" lane="404646506#3_0" startPos="185.50" endPos="200.50" friendlyPos="true" lines="J24 J74 J73">
+        <access lane="-24456474#1_0" pos="157.46" length="165.40" friendlyPos="1"/>
+        <access lane="-509352038#1_0" pos="5.45" length="190.06" friendlyPos="1"/>
+        <access lane="1222853446#0_0" pos="162.88" length="204.87" friendlyPos="1"/>
+        <access lane="24456474#0_0" pos="0.00" length="153.11" friendlyPos="1"/>
+        <access lane="509352038#0_0" pos="0.00" length="190.78" friendlyPos="1"/>
+    </busStop>
+</additional>

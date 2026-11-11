@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-11-04 14:26:08.227960 by Eclipse SUMO osmWebWizard.py v1_28_0+0000-daf91b55789
+<configuration>
+    <net-file value="C:\Users\pedro\OneDrive\Documents\Expoandes\ExpoU\2026-11-04-14-22-24\osm.net.xml.gz"/>
+    <additional-files value="C:\Users\pedro\OneDrive\Documents\Expoandes\ExpoU\2026-11-04-14-22-24\osm_stops.add.xml,C:\Users\pedro\OneDrive\Documents\Expoandes\ExpoU\2026-11-04-14-22-24\osm_pt.rou.xml"/>
+    <output-trip-file value="C:\Users\pedro\OneDrive\Documents\Expoandes\ExpoU\2026-11-04-14-22-24\osm.pedestrian.trips.xml"/>
+    <route-file value="C:\Users\pedro\OneDrive\Documents\Expoandes\ExpoU\2026-11-04-14-22-24\osm.pedestrian.rou.xml"/>
+    <persons value="True"/>
+    <persontrip.walk-opposite-factor value="0.8"/>
+    <prefix value="ped"/>
+    <trip-attributes value="modes=&quot;public&quot;"/>
+    <vehicle-class value="pedestrian"/>
+    <fringe-factor value="1"/>
+    <seed value="46"/>
+    <insertion-density value="10.0"/>
+    <duarouter-weights.tls-penalty value="20"/>
+</configuration>
+-->
+
+<!-- generated on 2026-11-04T14:26:08.121633-05:00 by Eclipse SUMO duarouter 1.28.0
+<duarouterConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/duarouterConfiguration.xsd">
+
+    <input>
+        <net-file value="C:\Users\pedro\OneDrive\Documents\Expoandes\ExpoU\2026-11-04-14-22-24\osm.net.xml.gz"/>
+        <additional-files value="C:\Users\pedro\OneDrive\Documents\Expoandes\ExpoU\2026-11-04-14-22-24\osm_stops.add.xml,C:\Users\pedro\OneDrive\Documents\Expoandes\ExpoU\2026-11-04-14-22-24\osm_pt.rou.xml"/>
+        <route-files value="C:\Users\pedro\OneDrive\Documents\Expoandes\ExpoU\2026-11-04-14-22-24\osm.pedestrian.trips.xml"/>
+    </input>
+
+    <output>
+        <output-file value="C:\Users\pedro\OneDrive\Documents\Expoandes\ExpoU\2026-11-04-14-22-24\osm.pedestrian.rou.xml"/>
+        <alternatives-output value="NUL"/>
+    </output>
+
+    <processing>
+        <routing-threads value="11"/>
+        <weights.tls-penalty value="20"/>
+        <persontrip.walk-opposite-factor value="0.8"/>
+    </processing>
+
+    <report>
+        <no-warnings value="true"/>
+        <ignore-errors value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+</duarouterConfiguration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <vType id="ped_pedestrian" vClass="pedestrian"/>
+    <person id="ped0" type="ped_pedestrian" depart="0.00">
+        <walk edges="24456474#0" busStop="14241026249"/> <!-- Universidades -->
+        <walk edges="509352038#0 1222853446#0 509352039 89118761#5"/>
+    </person>
+    <person id="ped1" type="ped_pedestrian" depart="90.56">
+        <walk edges="-24456474#1" busStop="14241026249"/> <!-- Universidades -->
+        <walk edges="-509352038#1"/>
+    </person>
+    <person id="ped2" type="ped_pedestrian" depart="181.13">
+        <walk edges="1060493360#3 523872353#0"/>
+    </person>
+    <person id="ped3" type="ped_pedestrian" depart="271.69">
+        <walk edges="88750541 -88750541"/>
+    </person>
+    <person id="ped4" type="ped_pedestrian" depart="362.26">
+        <walk edges="89118761#0 509352039 1550957954#0"/>
+    </person>
+    <person id="ped5" type="ped_pedestrian" depart="452.82">
+        <walk edges="89118761#5 89118761#0"/>
+    </person>
+    <person id="ped6" type="ped_pedestrian" depart="543.38">
+        <walk edges="-509352038#1 1222853446#0 509352039 89118761#5"/>
+    </person>
+    <person id="ped7" type="ped_pedestrian" depart="633.95">
+        <walk edges="1222853446#0 -509352038#1"/>
+    </person>
+    <person id="ped8" type="ped_pedestrian" depart="724.51">
+        <walk edges="509352039 1550957954#0"/>
+    </person>
+    <person id="ped9" type="ped_pedestrian" depart="815.07">
+        <walk edges="24456474#0" busStop="14241026249"/> <!-- Universidades -->
+        <walk edges="509352038#0"/>
+    </person>
+    <person id="ped10" type="ped_pedestrian" depart="905.64">
+        <walk edges="509352038#0 -509352038#1"/>
+    </person>
+    <person id="ped11" type="ped_pedestrian" depart="996.20">
+        <walk edges="509352039 1222853446#0 -509352038#1" busStop="14241026249"/> <!-- Universidades -->
+        <walk edges="24456474#0"/>
+    </person>
+    <person id="ped12" type="ped_pedestrian" depart="1086.77">
+        <walk edges="1550957954#0 1222853446#0 -509352038#1"/>
+    </person>
+    <person id="ped13" type="ped_pedestrian" depart="1177.33">
+        <walk edges="1016264367#0 24456495#0" busStop="14241026246"/> <!-- Museo del Oro -->
+        <ride busStop="14241026248" intended="pt_bus_F23:0.2" depart="1472.00"/> <!-- Las Aguas -->
+        <walk edges="1222853446#0 -509352038#1" busStop="14241026249"/> <!-- Universidades -->
+        <walk edges="-24456474#1"/>
+    </person>
+    <person id="ped14" type="ped_pedestrian" depart="1267.89">
+        <walk edges="89118761#0 509352039 1222853446#0 -509352038#1" busStop="14241026249"/> <!-- Universidades -->
+        <walk edges="-24456474#1"/>
+    </person>
+    <person id="ped15" type="ped_pedestrian" depart="1358.46">
+        <walk edges="24456495#0" busStop="14241026247"/> <!-- Museo del Oro -->
+        <ride busStop="14241026248" intended="pt_bus_J23:0.2" depart="1568.00"/> <!-- Las Aguas -->
+        <walk edges="1222853446#0 -509352038#1" busStop="14241026249"/> <!-- Universidades -->
+        <walk edges="-24456474#1"/>
+    </person>
+    <person id="ped16" type="ped_pedestrian" depart="1449.02">
+        <walk edges="1083001225#0 1060493360#3 523872353#0"/>
+    </person>
+    <person id="ped17" type="ped_pedestrian" depart="1539.58">
+        <walk edges="1222853446#0 509352038#0"/>
+    </person>
+    <person id="ped18" type="ped_pedestrian" depart="1630.15">
+        <walk edges="-24456474#1"/>
+    </person>
+    <person id="ped19" type="ped_pedestrian" depart="1720.71">
+        <walk edges="509352039 89118761#0"/>
+    </person>
+    <person id="ped20" type="ped_pedestrian" depart="1811.28">
+        <walk edges="89118761#0 509352039 1222853446#0 -509352038#1"/>
+    </person>
+    <person id="ped21" type="ped_pedestrian" depart="1901.84">
+        <walk edges="89118761#5 89118761#0"/>
+    </person>
+    <person id="ped22" type="ped_pedestrian" depart="1992.40">
+        <walk edges="1222853446#0 -509352038#1"/>
+    </person>
+    <person id="ped23" type="ped_pedestrian" depart="2082.97">
+        <walk edges="1083001236#0 24456495#0" busStop="14241026246"/> <!-- Museo del Oro -->
+        <ride busStop="14241026248" intended="pt_bus_F23:0.4" depart="2672.00"/> <!-- Las Aguas -->
+        <walk edges="1222853446#0 509352039 89118761#5"/>
+    </person>
+    <person id="ped24" type="ped_pedestrian" depart="2173.53">
+        <walk edges="24456474#0" busStop="14241026249"/> <!-- Universidades -->
+        <walk edges="509352038#0"/>
+    </person>
+    <person id="ped25" type="ped_pedestrian" depart="2264.09">
+        <walk edges="-24456474#1" busStop="14241026249"/> <!-- Universidades -->
+        <walk edges="509352038#0 1222853446#0 509352039 89118761#0"/>
+    </person>
+    <person id="ped26" type="ped_pedestrian" depart="2354.66">
+        <walk edges="1016264367#0 24456495#0" busStop="14241026246"/> <!-- Museo del Oro -->
+        <ride busStop="14241026248" intended="pt_bus_F23:0.4" depart="2672.00"/> <!-- Las Aguas -->
+        <walk edges="1222853446#0 -509352038#1" busStop="14241026249"/> <!-- Universidades -->
+        <walk edges="-24456474#1"/>
+    </person>
+    <person id="ped27" type="ped_pedestrian" depart="2445.22">
+        <walk edges="24456495#0" busStop="14241026246"/> <!-- Museo del Oro -->
+        <ride busStop="14241026248" intended="pt_bus_F23:0.4" depart="2672.00"/> <!-- Las Aguas -->
+        <walk edges="1222853446#0 509352039"/>
+    </person>
+    <person id="ped28" type="ped_pedestrian" depart="2535.79">
+        <walk edges="509352038#0 -509352038#1"/>
+    </person>
+    <person id="ped29" type="ped_pedestrian" depart="2626.35">
+        <walk edges="24456474#0" busStop="14241026249"/> <!-- Universidades -->
+        <walk edges="509352038#0 1222853446#0 509352039"/>
+    </person>
+    <person id="ped30" type="ped_pedestrian" depart="2716.91">
+        <walk edges="1060493360#3"/>
+    </person>
+    <person id="ped31" type="ped_pedestrian" depart="2807.48">
+        <walk edges="24456495#0" busStop="14241026246"/> <!-- Museo del Oro -->
+        <ride busStop="14241026248" intended="pt_bus_F23:0.5" depart="3272.00"/> <!-- Las Aguas -->
+        <walk edges="1222853446#0 509352039 89118761#5"/>
+    </person>
+    <person id="ped32" type="ped_pedestrian" depart="2898.04">
+        <walk edges="1222853446#0"/>
+    </person>
+    <person id="ped33" type="ped_pedestrian" depart="2988.60">
+        <walk edges="1060493360#0"/>
+    </person>
+    <person id="ped34" type="ped_pedestrian" depart="3079.17">
+        <walk edges="89118761#0 509352039 1222853446#0"/>
+    </person>
+    <person id="ped35" type="ped_pedestrian" depart="3169.73">
+        <walk edges="24456495#0" busStop="14241026247"/> <!-- Museo del Oro -->
+        <ride busStop="14241026248" intended="pt_bus_J23:0.5" depart="3368.00"/> <!-- Las Aguas -->
+        <walk edges="1222853446#0 509352039 89118761#0"/>
+    </person>
+    <person id="ped36" type="ped_pedestrian" depart="3260.30">
+        <walk edges="-509352038#1 1222853446#0 1550957954#0"/>
+    </person>
+    <person id="ped37" type="ped_pedestrian" depart="3350.86">
+        <walk edges="509352039 1222853446#0 509352038#0"/>
+    </person>
+    <person id="ped38" type="ped_pedestrian" depart="3441.42">
+        <walk edges="1222853446#0 -509352038#1" busStop="14241026249"/> <!-- Universidades -->
+        <walk edges="-24456474#1"/>
+    </person>
+    <person id="ped39" type="ped_pedestrian" depart="3531.99">
+        <walk edges="1222853446#0 -509352038#1" busStop="14241026249"/> <!-- Universidades -->
+        <walk edges="-24456474#1"/>
+    </person>
+</routes>

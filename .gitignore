@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Modelo entrenado (se regenera con train.py)
+*.pkl
+
+# Sistema
+.DS_Store
+# Entorno virtual de Python (NO se sube: es pesado y se recrea con requirements.txt)
+.venv/
+venv/
+
+# Cachés de Python
+__pycache__/
+*.pyc
+
+# Salidas temporales de simulaciones de SUMO (se regeneran al ejecutar)
+tripinfos.xml
+stopinfos.xml
+stats.xml
+resultados_normal.xml
+resumen_normal.xml
+resultados_ia_5.xml
+resumen_ia_5.xml
+
+# Configuración local de editor
+.vscode/

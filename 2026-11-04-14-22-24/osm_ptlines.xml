@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-11-04T14:25:54.463395-05:00 by Eclipse SUMO netconvert 1.28.0
+<netconvertConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <type-files value="${SUMO_HOME}\data\typemap\osmNetconvert.typ.xml,${SUMO_HOME}\data\typemap\osmNetconvertUrbanDe.typ.xml,${SUMO_HOME}\data\typemap\osmNetconvertPedestrians.typ.xml,${SUMO_HOME}\data\typemap\osmNetconvertShips.typ.xml,${SUMO_HOME}\data\typemap\osmNetconvertBicycle.typ.xml,${SUMO_HOME}\data\typemap\osmNetconvertAerialway.typ.xml"/>
+        <osm-files value="osm_bbox.osm.xml.gz"/>
+    </input>
+
+    <output>
+        <output-file value="osm.net.xml.gz"/>
+        <output.street-names value="true"/>
+        <output.original-names value="true"/>
+        <ptstop-output value="osm_stops.add.xml"/>
+        <ptline-output value="osm_ptlines.xml"/>
+        <ptline-clean-up value="true"/>
+    </output>
+
+    <projection>
+        <proj value="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs"/>
+    </projection>
+
+    <processing>
+        <geometry.remove value="true"/>
+    </processing>
+
+    <tls_building>
+        <tls.discard-simple value="true"/>
+        <tls.join value="true"/>
+        <tls.guess-signals value="true"/>
+        <tls.default-type value="actuated"/>
+    </tls_building>
+
+    <ramp_guessing>
+        <ramps.guess value="true"/>
+    </ramp_guessing>
+
+    <edge_removal>
+        <keep-edges.by-vclass value="passenger,bus,tram,rail_urban,subway,cable_car,rail"/>
+    </edge_removal>
+
+    <junctions>
+        <junctions.join value="true"/>
+    </junctions>
+
+    <pedestrian>
+        <crossings.guess value="true"/>
+    </pedestrian>
+
+    <railway>
+        <railway.topology.repair value="true"/>
+    </railway>
+
+    <formats>
+        <osm.bike-access value="true"/>
+        <osm.sidewalks value="true"/>
+    </formats>
+
+    <report>
+        <verbose value="true"/>
+    </report>
+
+</netconvertConfiguration>
+-->
+
+<ptLines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/ptlines_file.xsd">
+    <ptLine id="14277056" name="2 - Museo Nacional" line="2" type="bus" vClass="bus" color="black" completeness="0.18" missingBefore="9">
+        <busStop id="14244133146" name="Las Nieves"/>
+        <busStop id="14244133148" name="San Diego"/>
+    </ptLine>
+    <ptLine id="19455374" name="M47 - Museo Nacional" line="M47" type="bus" vClass="bus" color="1,154,159" completeness="0.08" missingBefore="3" missingAfter="8">
+        <busStop id="14244133146" name="Las Nieves"/>
+    </ptLine>
+    <ptLine id="19566311" name="G47 - Portal Sur" line="G47" type="bus" vClass="bus" color="0,158,223" completeness="0.17" missingBefore="3" missingAfter="7">
+        <busStop id="14244133143" name="Las Nieves"/>
+        <busStop id="14244133149" name="San Diego"/>
+    </ptLine>
+    <ptLine id="20666658" name="K10 - Portal Eldorado" line="K10" type="bus" vClass="bus" color="213,176,123" completeness="0.07" missingBefore="6" missingAfter="8">
+        <busStop id="14244133144" name="Las Nieves"/>
+    </ptLine>
+    <ptLine id="20666659" name="L10 - Portal 20 de Julio" line="L10" type="bus" vClass="bus" color="1,154,159" completeness="0.07" missingBefore="6" missingAfter="8">
+        <busStop id="14244133145" name="Las Nieves"/>
+    </ptLine>
+    <ptLine id="20670502" name="M51 - Museo Nacional" line="M51" type="bus" vClass="bus" color="1,154,159" completeness="0.14" missingBefore="1" missingAfter="11">
+        <busStop id="14244133144" name="Las Nieves"/>
+        <busStop id="14244133148" name="San Diego"/>
+    </ptLine>
+    <ptLine id="20700203" name="H83 - Portal Usme" line="H83" type="bus" vClass="bus" color="241,132,1" completeness="0.09" missingBefore="6" missingAfter="4">
+        <busStop id="14244133149" name="San Diego"/>
+    </ptLine>
+    <ptLine id="21250656" name="B74 - Portal Norte" line="B74" type="bus" vClass="bus" color="128,186,39" completeness="0.08" missingBefore="8" missingAfter="3">
+        <route edges="532780094#0 1102260896#1"/>
+        <busStop id="14241026249" name="Universidades"/>
+    </ptLine>
+    <ptLine id="21250990" name="C73 - Portal Suba" line="C73" type="bus" vClass="bus" color="252,187,31" completeness="0.11" missingBefore="6" missingAfter="2">
+        <route edges="532780094#0 1102260896#1"/>
+        <busStop id="14241026249" name="Universidades"/>
+    </ptLine>
+    <ptLine id="21252414" name="D24 - Portal 80" line="D24" type="bus" vClass="bus" color="130,100,170" completeness="0.08" missingBefore="7" missingAfter="4">
+        <route edges="532780094#0 1102260896#1"/>
+        <busStop id="14241026251" name="Universidades"/>
+    </ptLine>
+    <ptLine id="21253357" name="F23 - Portal Américas" line="F23" type="bus" vClass="bus" color="221,6,21" completeness="0.18" missingAfter="9">
+        <route edges="89118761#0 89118761#5 979490575#0 889995785#0 889995785#3 242708699#0 242708699#8"/>
+        <busStop id="14241026246" name="Museo del Oro"/>
+        <busStop id="14241026248" name="Las Aguas"/>
+    </ptLine>
+    <ptLine id="21253613" name="F51 - Portal Américas" line="F51" type="bus" vClass="bus" color="221,6,21" completeness="0.14" missingBefore="1" missingAfter="11">
+        <busStop id="14244133145" name="Las Nieves"/>
+        <busStop id="14244133149" name="San Diego"/>
+    </ptLine>
+    <ptLine id="21254345" name="H76 - Portal Usme" line="H76" type="bus" vClass="bus" color="241,132,1" completeness="0.10" missingAfter="9">
+        <route edges="509345552 404646506#3 523847970 532780094#0 1102260896#1"/>
+        <busStop id="14241026250" name="Universidades"/>
+    </ptLine>
+    <ptLine id="21254347" name="J23 - Las Aguas" line="J23" type="bus" vClass="bus" color="225,162,173" completeness="0.15" missingAfter="11">
+        <route edges="242708697#0 242708697#1 -889995785#3 -889995785#2 -979490575#1 1550957954#0 1222853446#0"/>
+        <busStop id="14241026247" name="Museo del Oro"/>
+        <busStop id="14241026248" name="Las Aguas"/>
+    </ptLine>
+    <ptLine id="21254356" name="J76 - Universidades" line="J76" type="bus" vClass="bus" color="225,162,173" completeness="0.10" missingAfter="9">
+        <route edges="509345552 404646506#3"/>
+        <busStop id="14241026250" name="Universidades"/>
+    </ptLine>
+    <ptLine id="21254358" name="J24 - Universidades" line="J24" type="bus" vClass="bus" color="225,162,173" completeness="0.08" missingBefore="8" missingAfter="4">
+        <route edges="509345552 404646506#3"/>
+        <busStop id="2394674234" name="Universidades"/>
+    </ptLine>
+    <ptLine id="21254363" name="J74 - Universidades" line="J74" type="bus" vClass="bus" color="225,162,173" completeness="0.09" missingBefore="7" missingAfter="3">
+        <route edges="509345552 404646506#3"/>
+        <busStop id="2394674234" name="Universidades"/>
+    </ptLine>
+    <ptLine id="21254366" name="J70 - Las Aguas" line="J70" type="bus" vClass="bus" color="225,162,173" completeness="0.17" missingBefore="8" missingAfter="2">
+        <route edges="242708697#0 242708697#1 -889995785#3 -889995785#2 -979490575#1 1550957954#0 1222853446#0"/>
+        <busStop id="14241026247" name="Museo del Oro"/>
+        <busStop id="14241026248" name="Las Aguas"/>
+    </ptLine>
+    <ptLine id="21254395" name="J73 - Universidades" line="J73" type="bus" vClass="bus" color="225,162,173" completeness="0.10" missingBefore="7" missingAfter="2">
+        <route edges="509345552 404646506#3"/>
+        <busStop id="2394674234" name="Universidades"/>
+    </ptLine>
+    <ptLine id="21256749" name="1 - Universidades" line="1" type="bus" vClass="bus" color="black" completeness="0.07" missingAfter="13">
+        <route edges="509345552 404646506#3"/>
+        <busStop id="14241026250" name="Universidades"/>
+    </ptLine>
+    <ptLine id="21256750" name="1 - Portal Eldorado" line="1" type="bus" vClass="bus" color="black" completeness="0.07" missingAfter="13">
+        <route edges="532780094#0 1102260896#1"/>
+        <busStop id="14241026251" name="Universidades"/>
+    </ptLine>
+    <ptLine id="21256769" name="2 - Portal 20 de Julio" line="2" type="bus" vClass="bus" color="black" completeness="0.18" missingBefore="9">
+        <busStop id="14244133143" name="Las Nieves"/>
+        <busStop id="14244133147" name="San Diego"/>
+    </ptLine>
+    <ptLine id="21263932" name="M82 - CL 134 - KR7" line="M82" type="bus" vClass="bus" color="1,154,159" completeness="0.03" missingBefore="4" missingAfter="24">
+        <busStop id="14244133148" name="San Diego"/>
+    </ptLine>
+    <ptLine id="21263933" name="L82 - Portal 20 de Julio" line="L82" type="bus" vClass="bus" color="1,154,159" completeness="0.04" missingBefore="4" missingAfter="21">
+        <busStop id="14244133147" name="San Diego"/>
+    </ptLine>
+</ptLines>

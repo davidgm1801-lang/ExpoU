@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+
+    <vType id="car"
+           accel="2.6"
+           decel="4.5"
+           sigma="0.5"
+           length="5"
+           maxSpeed="13.9"/>
+
+    <!-- Recorridos rectos -->
+    <route id="north_south" edges="N_C C_S"/>
+    <route id="south_north" edges="S_C C_N"/>
+    <route id="east_west" edges="E_C C_W"/>
+    <route id="west_east" edges="W_C C_E"/>
+
+    <!-- Generación de vehículos -->
+    <flow id="traffic1" type="car" route="north_south"
+          begin="0" end="1000" vehsPerHour="300"/>
+
+    <flow id="traffic2" type="car" route="south_north"
+          begin="0" end="1000" vehsPerHour="300"/>
+
+    <flow id="traffic3" type="car" route="east_west"
+          begin="0" end="1000" vehsPerHour="300"/>
+
+    <flow id="traffic4" type="car" route="west_east"
+          begin="0" end="1000" vehsPerHour="300"/>
+
+</routes>

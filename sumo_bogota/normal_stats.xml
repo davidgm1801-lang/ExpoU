@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-11-05T11:16:36.840056-05:00 by Eclipse SUMO GUI 1.28.0
+<sumoConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="sumo_bogota/osm.net.xml.gz"/>
+        <route-files value="sumo_bogota/osm.bicycle.trips.xml,sumo_bogota/osm.bus.trips.xml,sumo_bogota/osm.motorcycle.trips.xml,sumo_bogota/osm.passenger.trips.xml,sumo_bogota/osm.pedestrian.rou.xml,sumo_bogota/osm.truck.trips.xml,sumo_bogota/osm_pt.rou.xml"/>
+        <additional-files value="sumo_bogota/osm.poly.xml.gz,sumo_bogota/osm_stops.add.xml,sumo_bogota/output.add.xml"/>
+    </input>
+
+    <output>
+        <output-prefix value="normal_"/>
+        <tripinfo-output value="sumo_bogota/tripinfos.xml"/>
+        <stop-output value="sumo_bogota/stopinfos.xml"/>
+        <statistic-output value="sumo_bogota/stats.xml"/>
+    </output>
+
+    <time>
+        <end value="4556"/>
+    </time>
+
+    <processing>
+        <ignore-route-errors value="true"/>
+        <scale value="2"/>
+        <tls.actuated.jam-threshold value="30"/>
+    </processing>
+
+    <routing>
+        <device.rerouting.adaptation-steps value="18"/>
+        <device.rerouting.adaptation-interval value="10"/>
+    </routing>
+
+    <report>
+        <verbose value="true"/>
+        <duration-log.statistics value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+    <random_number>
+        <seed value="42"/>
+    </random_number>
+
+    <gui_only>
+        <gui-settings-file value="sumo_bogota/osm.view.xml"/>
+        <start value="true"/>
+        <delay value="50"/>
+    </gui_only>
+
+</sumoConfiguration>
+-->
+
+<statistics xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/statistic_file.xsd">
+    <performance clockBegin="-60337.63" clockEnd="-60160.05" clockDuration="177.58" traciDuration="16.59" realTimeFactor="25.66" vehicleUpdatesPerSecond="37717.18" personUpdatesPerSecond="248.78" begin="0.00" end="4556.00" duration="4556.00"/>
+    <vehicles loaded="5232" inserted="4952" running="2534" waiting="280"/>
+    <teleports total="972" jam="383" yield="532" wrongLane="55"/>
+    <safety collisions="3" emergencyStops="0" emergencyBraking="0"/>
+    <persons loaded="80" running="4" jammed="3"/>
+    <personTeleports total="0" abortWait="0" wrongDest="0"/>
+    <vehicleTripStatistics count="2015" routeLength="1679.42" speed="4.83" duration="567.39" waitingTime="288.33" timeLoss="387.70" departDelay="7.26" departDelayWaiting="-1.00" totalTravelTime="1143301.00" totalDepartDelay="17181.36"/>
+    <bikeTripStatistics count="403" routeLength="1523.81" speed="3.20" duration="655.33" waitingTime="310.03" timeLoss="380.01" departDelay="6.32" totalTravelTime="264099.00"/>
+    <pedestrianStatistics number="112" routeLength="127.96" duration="173.43" timeLoss="79.07"/>
+    <rideStatistics number="10" waitingTime="182.20" routeLength="949.24" duration="885.40" bus="10" train="0" taxi="0" bike="0" aborted="0"/>
+    <transportStatistics number="0"/>
+</statistics>

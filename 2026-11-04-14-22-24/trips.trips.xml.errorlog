@@ -1,0 +1,15 @@
+Warning: No connection between edge '509352046#13' and edge '509352046#0' found.
+Warning: Vehicle '2_bus_G47:0' has no valid route from edge '509352046#13' to stop edge '509352046#0'.
+Warning: busStop '14244133149' for vehicle '2_bus_G47:0' on lane '509352046#0_0' is not downstream the current route.
+Warning: No connection between edge '509352046#13' and edge '509352046#0' found.
+Warning: Vehicle '11_bus_F51:0' has no valid route from edge '509352046#13' to stop edge '509352046#0'.
+Warning: busStop '14244133149' for vehicle '11_bus_F51:0' on lane '509352046#0_0' is not downstream the current route.
+Warning: Teleporting vehicle '2_bus_G47:0'; waited too long (wrong lane, disconnected), lane='509352046#13_0', time=171.00.
+Warning: Vehicle '2_bus_G47:0' ends teleporting on edge '509352046#13', time=171.00.
+Warning: Teleporting vehicle '11_bus_F51:0'; waited too long (wrong lane, disconnected), lane='509352046#13_0', time=361.00.
+Warning: Vehicle '11_bus_F51:0' ends teleporting on edge '509352046#13', time=361.00.
+Warning: No connection between edge '509352046#13' and edge '509352046#0' found.
+Warning: Vehicle '21_bus_2:1' has no valid route from edge '509352046#13' to stop edge '509352046#0'.
+Warning: busStop '14244133147' for vehicle '21_bus_2:1' on lane '509352046#0_0' is not downstream the current route.
+Warning: Teleporting vehicle '21_bus_2:1'; waited too long (wrong lane, disconnected), lane='509352046#13_0', time=639.00.
+Warning: Vehicle '21_bus_2:1' ends teleporting on edge '509352046#13', time=639.00.

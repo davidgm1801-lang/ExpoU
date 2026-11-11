@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-11-04T10:17:35.842135-05:00 by Eclipse SUMO netconvert 1.28.0
+<netconvertConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <sumo-net-file value="network.net.xml"/>
+    </input>
+
+    <output>
+        <plain-output-prefix value="red"/>
+    </output>
+
+    <processing>
+        <geometry.min-radius.fix.railways value="false"/>
+        <geometry.avoid-overlap value="false"/>
+        <geometry.max-grade.fix value="false"/>
+        <offset.disable-normalization value="true"/>
+    </processing>
+
+    <junctions>
+        <no-turnarounds value="true"/>
+    </junctions>
+
+</netconvertConfiguration>
+-->
+
+<connections version="1.20" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/connections_file.xsd">
+    <connection from="A0A1" to="A1B1" fromLane="0" toLane="0"/>
+
+    <connection from="A0B0" to="B0B1" fromLane="0" toLane="0"/>
+
+    <connection from="A1A0" to="A0B0" fromLane="0" toLane="0"/>
+
+    <connection from="A1B1" to="B1B0" fromLane="0" toLane="0"/>
+
+    <connection from="B0A0" to="A0A1" fromLane="0" toLane="0"/>
+
+    <connection from="B0B1" to="B1A1" fromLane="0" toLane="0"/>
+
+    <connection from="B1A1" to="A1A0" fromLane="0" toLane="0"/>
+
+    <connection from="B1B0" to="B0A0" fromLane="0" toLane="0"/>
+
+</connections>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-11-04 14:25:58.389197 by Eclipse SUMO osmWebWizard.py v1_28_0+0000-daf91b55789
+<configuration>
+    <net-file value="C:\Users\pedro\OneDrive\Documents\Expoandes\ExpoU\2026-11-04-14-22-24\osm.net.xml.gz"/>
+    <ptlines-file value="C:\Users\pedro\OneDrive\Documents\Expoandes\ExpoU\2026-11-04-14-22-24\osm_ptlines.xml"/>
+    <ptstops-file value="C:\Users\pedro\OneDrive\Documents\Expoandes\ExpoU\2026-11-04-14-22-24\osm_stops.add.xml"/>
+    <output-file value="C:\Users\pedro\OneDrive\Documents\Expoandes\ExpoU\2026-11-04-14-22-24\osm_pt.rou.xml"/>
+    <stopinfos-file value="C:\Users\pedro\OneDrive\Documents\Expoandes\ExpoU\2026-11-04-14-22-24\stopinfos.xml"/>
+    <routes-file value="C:\Users\pedro\OneDrive\Documents\Expoandes\ExpoU\2026-11-04-14-22-24\vehroutes.xml"/>
+    <trips-file value="C:\Users\pedro\OneDrive\Documents\Expoandes\ExpoU\2026-11-04-14-22-24\trips.trips.xml"/>
+    <min-stops value="0"/>
+    <extend-to-fringe value="True"/>
+    <random-begin value="True"/>
+    <seed value="42"/>
+    <ignore-errors value="True"/>
+    <types value="bus,tram,subway,light_rail,train,trolleybus,monorail,minibus,share_taxi,ferry,aerialway"/>
+    <vtype-prefix value="pt_"/>
+    <verbose value="True"/>
+</configuration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <vType id="pt_bus" vClass="bus"/>
+    <vType id="pt_tram" vClass="tram"/>
+    <vType id="pt_train" vClass="rail"/>
+    <vType id="pt_subway" vClass="subway"/>
+    <vType id="pt_light_rail" vClass="rail_urban"/>
+    <vType id="pt_monorail" vClass="rail_urban"/>
+    <vType id="pt_trolleybus" vClass="bus"/>
+    <vType id="pt_minibus" vClass="bus"/>
+    <vType id="pt_share_taxi" vClass="taxi"/>
+    <vType id="pt_aerialway" vClass="cable_car" length="2.5" width="2" personCapacity="4"/>
+    <vType id="pt_ferry" vClass="ship"/>
+    <route id="pt_bus_1:0" color="black" edges="509345552 404646506#3" >
+        <stop busStop="14241026250" duration="20" until="158.0"/> <!-- Universidades -->
+    </route>
+    <route id="pt_bus_1:1" color="black" edges="532780094#0 1102260896#1" >
+        <stop busStop="14241026251" duration="20" until="58.0"/> <!-- Universidades -->
+    </route>
+    <route id="pt_bus_2:0" color="black" edges="509352045#0 509352045#6 509352045#10" >
+        <stop busStop="14244133146" duration="20" until="139.0"/> <!-- Las Nieves -->
+        <stop busStop="14244133148" duration="20" until="294.0"/> <!-- San Diego -->
+    </route>
+    <route id="pt_bus_2:1" color="black" edges="509352046#13 509352046#13" >
+        <stop busStop="14244133143" duration="20" until="60.0" jump="110.91797075007237"/> <!-- Las Nieves -->
+    </route>
+    <route id="pt_bus_B74:0" color="128,186,39" edges="532780094#0 1102260896#1" >
+        <stop busStop="14241026249" duration="20" until="44.0"/> <!-- Universidades -->
+    </route>
+    <route id="pt_bus_C73:0" color="252,187,31" edges="532780094#0 1102260896#1" >
+        <stop busStop="14241026249" duration="20" until="76.0"/> <!-- Universidades -->
+    </route>
+    <route id="pt_bus_D24:0" color="130,100,170" edges="532780094#0 1102260896#1" >
+        <stop busStop="14241026251" duration="20" until="122.0"/> <!-- Universidades -->
+    </route>
+    <route id="pt_bus_F23:0" color="221,6,21" edges="89118761#0 89118761#5 979490575#0 889995785#0 889995785#3 242708699#0 242708699#8 242708697#0 242708697#1 -889995785#3 -889995785#2 -979490575#1 1550957954#0 1222853446#0" >
+        <stop busStop="14241026246" duration="20" until="107.0"/> <!-- Museo del Oro -->
+        <stop busStop="14241026248" duration="20" until="254.0"/> <!-- Las Aguas -->
+    </route>
+    <route id="pt_bus_F51:0" color="221,6,21" edges="509352046#13 509352046#13" >
+        <stop busStop="14244133145" duration="20" until="44.0" jump="110.91797075007237"/> <!-- Las Nieves -->
+    </route>
+    <route id="pt_bus_G47:0" color="0,158,223" edges="509352046#13 509352046#13" >
+        <stop busStop="14244133143" duration="20" until="60.0" jump="110.91797075007237"/> <!-- Las Nieves -->
+    </route>
+    <route id="pt_bus_H76:0" color="241,132,1" edges="509345552 404646506#3 1550957299 497789467#2 1318920652 1162644628 1189848393#0 1189848393#1 1318920653 375276727 1155114158 1060482343#0 1102260896#1" >
+        <stop busStop="14241026250" duration="20" until="158.0"/> <!-- Universidades -->
+    </route>
+    <route id="pt_bus_H83:0" color="241,132,1" edges="509352046#0" >
+        <stop busStop="14244133149" duration="20" until="37.0"/> <!-- San Diego -->
+    </route>
+    <route id="pt_bus_J23:0" color="225,162,173" edges="242708697#0 242708697#1 -889995785#3 -889995785#2 -979490575#1 1550957954#0 1222853446#0" >
+        <stop busStop="14241026247" duration="20" until="65.0"/> <!-- Museo del Oro -->
+        <stop busStop="14241026248" duration="20" until="193.0"/> <!-- Las Aguas -->
+    </route>
+    <route id="pt_bus_J24:0" color="225,162,173" edges="509345552 404646506#3" >
+        <stop busStop="2394674234" duration="20" until="186.0"/> <!-- Universidades -->
+    </route>
+    <route id="pt_bus_J70:0" color="225,162,173" edges="242708697#0 242708697#1 -889995785#3 -889995785#2 -979490575#1 1550957954#0 1222853446#0" >
+        <stop busStop="14241026247" duration="20" until="59.0"/> <!-- Museo del Oro -->
+        <stop busStop="14241026248" duration="20" until="182.0"/> <!-- Las Aguas -->
+    </route>
+    <route id="pt_bus_J73:0" color="225,162,173" edges="509345552 404646506#3" >
+        <stop busStop="2394674234" duration="20" until="210.0"/> <!-- Universidades -->
+    </route>
+    <route id="pt_bus_J74:0" color="225,162,173" edges="509345552 404646506#3" >
+        <stop busStop="2394674234" duration="20" until="195.0"/> <!-- Universidades -->
+    </route>
+    <route id="pt_bus_J76:0" color="225,162,173" edges="509345552 404646506#3" >
+        <stop busStop="14241026250" duration="20" until="162.0"/> <!-- Universidades -->
+    </route>
+    <route id="pt_bus_K10:0" color="213,176,123" edges="509352045#0" >
+        <stop busStop="14244133144" duration="20" until="122.0"/> <!-- Las Nieves -->
+    </route>
+    <route id="pt_bus_L10:0" color="1,154,159" edges="509352046#13" >
+        <stop busStop="14244133145" duration="20" until="45.0"/> <!-- Las Nieves -->
+    </route>
+    <route id="pt_bus_L82:0" color="1,154,159" edges="509352046#0" >
+        <stop busStop="14244133147" duration="20" until="65.0"/> <!-- San Diego -->
+    </route>
+    <route id="pt_bus_M47:0" color="1,154,159" edges="509352045#0" >
+        <stop busStop="14244133146" duration="20" until="166.0"/> <!-- Las Nieves -->
+    </route>
+    <route id="pt_bus_M51:0" color="1,154,159" edges="509352045#0 509352045#6 509352045#10" >
+        <stop busStop="14244133144" duration="20" until="122.0"/> <!-- Las Nieves -->
+        <stop busStop="14244133148" duration="20" until="301.0"/> <!-- San Diego -->
+    </route>
+    <route id="pt_bus_M82:0" color="1,154,159" edges="509352045#10" >
+        <stop busStop="14244133148" duration="20" until="64.0"/> <!-- San Diego -->
+    </route>
+    <flow id="pt_bus_2:0" type="pt_bus" route="pt_bus_2:0" begin="3.0" end="3603.0" period="600" line="2:0" >
+        <param key="name" value="2 - Museo Nacional"/>
+        <param key="completeness" value="0.18"/>
+    </flow>
+    <flow id="pt_bus_F23:0" type="pt_bus" route="pt_bus_F23:0" begin="165.0" end="3765.0" period="600" line="F23:0" >
+        <param key="name" value="F23 - Portal Américas"/>
+        <param key="completeness" value="0.18"/>
+    </flow>
+    <flow id="pt_bus_F51:0" type="pt_bus" route="pt_bus_F51:0" begin="204.0" end="3804.0" period="600" line="F51:0" >
+        <param key="name" value="F51 - Portal Américas"/>
+        <param key="completeness" value="0.14"/>
+    </flow>
+    <flow id="pt_bus_H76:0" type="pt_bus" route="pt_bus_H76:0" begin="253.0" end="3853.0" period="600" line="H76:0" >
+        <param key="name" value="H76 - Portal Usme"/>
+        <param key="completeness" value="0.10"/>
+    </flow>
+    <flow id="pt_bus_J23:0" type="pt_bus" route="pt_bus_J23:0" begin="303.0" end="3903.0" period="600" line="J23:0" >
+        <param key="name" value="J23 - Las Aguas"/>
+        <param key="completeness" value="0.15"/>
+    </flow>
+    <flow id="pt_bus_J76:0" type="pt_bus" route="pt_bus_J76:0" begin="326.0" end="3926.0" period="600" line="J76:0" >
+        <param key="name" value="J76 - Universidades"/>
+        <param key="completeness" value="0.10"/>
+    </flow>
+    <flow id="pt_bus_J24:0" type="pt_bus" route="pt_bus_J24:0" begin="353.0" end="3953.0" period="600" line="J24:0" >
+        <param key="name" value="J24 - Universidades"/>
+        <param key="completeness" value="0.08"/>
+    </flow>
+    <flow id="pt_bus_J74:0" type="pt_bus" route="pt_bus_J74:0" begin="383.0" end="3983.0" period="600" line="J74:0" >
+        <param key="name" value="J74 - Universidades"/>
+        <param key="completeness" value="0.09"/>
+    </flow>
+    <flow id="pt_bus_J70:0" type="pt_bus" route="pt_bus_J70:0" begin="389.0" end="3989.0" period="600" line="J70:0" >
+        <param key="name" value="J70 - Las Aguas"/>
+        <param key="completeness" value="0.17"/>
+    </flow>
+    <flow id="pt_bus_J73:0" type="pt_bus" route="pt_bus_J73:0" begin="406.0" end="4006.0" period="600" line="J73:0" >
+        <param key="name" value="J73 - Universidades"/>
+        <param key="completeness" value="0.10"/>
+    </flow>
+    <flow id="pt_bus_1:0" type="pt_bus" route="pt_bus_1:0" begin="418.0" end="4018.0" period="600" line="1:0" >
+        <param key="name" value="1 - Universidades"/>
+        <param key="completeness" value="0.07"/>
+    </flow>
+    <flow id="pt_bus_M47:0" type="pt_bus" route="pt_bus_M47:0" begin="15.0" end="3615.0" period="600" line="M47:0" >
+        <param key="name" value="M47 - Museo Nacional"/>
+        <param key="completeness" value="0.08"/>
+    </flow>
+    <flow id="pt_bus_1:1" type="pt_bus" route="pt_bus_1:1" begin="441.0" end="4041.0" period="600" line="1:1" >
+        <param key="name" value="1 - Portal Eldorado"/>
+        <param key="completeness" value="0.07"/>
+    </flow>
+    <flow id="pt_bus_2:1" type="pt_bus" route="pt_bus_2:1" begin="483.0" end="4083.0" period="600" line="2:1" >
+        <param key="name" value="2 - Portal 20 de Julio"/>
+        <param key="completeness" value="0.18"/>
+    </flow>
+    <flow id="pt_bus_M82:0" type="pt_bus" route="pt_bus_M82:0" begin="485.0" end="4085.0" period="600" line="M82:0" >
+        <param key="name" value="M82 - CL 134 - KR7"/>
+        <param key="completeness" value="0.03"/>
+    </flow>
+    <flow id="pt_bus_L82:0" type="pt_bus" route="pt_bus_L82:0" begin="535.0" end="4135.0" period="600" line="L82:0" >
+        <param key="name" value="L82 - Portal 20 de Julio"/>
+        <param key="completeness" value="0.04"/>
+    </flow>
+    <flow id="pt_bus_G47:0" type="pt_bus" route="pt_bus_G47:0" begin="15.0" end="3615.0" period="600" line="G47:0" >
+        <param key="name" value="G47 - Portal Sur"/>
+        <param key="completeness" value="0.17"/>
+    </flow>
+    <flow id="pt_bus_K10:0" type="pt_bus" route="pt_bus_K10:0" begin="21.0" end="3621.0" period="600" line="K10:0" >
+        <param key="name" value="K10 - Portal Eldorado"/>
+        <param key="completeness" value="0.07"/>
+    </flow>
+    <flow id="pt_bus_L10:0" type="pt_bus" route="pt_bus_L10:0" begin="52.0" end="3652.0" period="600" line="L10:0" >
+        <param key="name" value="L10 - Portal 20 de Julio"/>
+        <param key="completeness" value="0.07"/>
+    </flow>
+    <flow id="pt_bus_M51:0" type="pt_bus" route="pt_bus_M51:0" begin="93.0" end="3693.0" period="600" line="M51:0" >
+        <param key="name" value="M51 - Museo Nacional"/>
+        <param key="completeness" value="0.14"/>
+    </flow>
+    <flow id="pt_bus_H83:0" type="pt_bus" route="pt_bus_H83:0" begin="119.0" end="3719.0" period="600" line="H83:0" >
+        <param key="name" value="H83 - Portal Usme"/>
+        <param key="completeness" value="0.09"/>
+    </flow>
+    <flow id="pt_bus_B74:0" type="pt_bus" route="pt_bus_B74:0" begin="131.0" end="3731.0" period="600" line="B74:0" >
+        <param key="name" value="B74 - Portal Norte"/>
+        <param key="completeness" value="0.08"/>
+    </flow>
+    <flow id="pt_bus_C73:0" type="pt_bus" route="pt_bus_C73:0" begin="136.0" end="3736.0" period="600" line="C73:0" >
+        <param key="name" value="C73 - Portal Suba"/>
+        <param key="completeness" value="0.11"/>
+    </flow>
+    <flow id="pt_bus_D24:0" type="pt_bus" route="pt_bus_D24:0" begin="142.0" end="3742.0" period="600" line="D24:0" >
+        <param key="name" value="D24 - Portal 80"/>
+        <param key="completeness" value="0.08"/>
+    </flow>
+</routes>
