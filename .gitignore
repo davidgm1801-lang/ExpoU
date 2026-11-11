@@ -1,24 +1,35 @@
-# Python
+# ==================================================
+# .gitignore de ExpoU
+# ==================================================
+
+# --- Python ---
 __pycache__/
 *.py[cod]
 *.egg-info/
+
+# --- Entorno virtual (se recrea con requirements.txt) ---
 .venv/
 venv/
 
-# Modelo entrenado (se regenera con train.py)
+# --- Configuración local de editor ---
+.vscode/
+.DS_Store
+
+# ==================================================
+# MODELOS ENTRENADOS
+# ==================================================
+# Por defecto ignoramos los .pkl (archivos binarios regenerables).
 *.pkl
 
-# Sistema
-.DS_Store
-# Entorno virtual de Python (NO se sube: es pesado y se recrea con requirements.txt)
-.venv/
-venv/
+# EXCEPCIÓN: los modelos independientes del entrenamiento de 5 agentes
+# (100 episodios) SÍ se versionan como respaldo. Tardan en generarse
+# y el proyecto exige no perderlos ni reentrenarlos sin justificación.
+!q_table_independiente_*.pkl
 
-# Cachés de Python
-__pycache__/
-*.pyc
-
-# Salidas temporales de simulaciones de SUMO (se regeneran al ejecutar)
+# ==================================================
+# SALIDAS TEMPORALES DE SIMULACIONES DE SUMO
+# ==================================================
+# Se regeneran al ejecutar las simulaciones; no se versionan.
 tripinfos.xml
 stopinfos.xml
 stats.xml
@@ -27,5 +38,9 @@ resumen_normal.xml
 resultados_ia_5.xml
 resumen_ia_5.xml
 
-# Configuración local de editor
-.vscode/
+# ==================================================
+# ARCHIVOS GRANDES / NO RELACIONADOS CON EL CÓDIGO
+# ==================================================
+# PDFs y documentos pesados (p. ej. historiales de conversaciones)
+# no forman parte del proyecto y pueden exceder el límite de GitHub.
+*.pdf
