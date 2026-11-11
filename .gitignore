@@ -38,6 +38,10 @@ resumen_normal.xml
 resultados_ia_5.xml
 resumen_ia_5.xml
 
+# Salidas del evaluador de la Etapa 2 (archivos por corrida, regenerables).
+# El CSV final (evaluacion_etapa2.csv) SI se versiona como evidencia.
+salidas_evaluacion/
+
 # ==================================================
 # ARCHIVOS GRANDES / NO RELACIONADOS CON EL CÓDIGO
 # ==================================================

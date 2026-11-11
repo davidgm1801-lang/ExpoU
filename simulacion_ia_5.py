@@ -110,23 +110,24 @@ def cargar_agentes():
 
         agente = QLearningAgent()
 
-        agente.load("q_table_sumo.pkl")
+        # Cargar la tabla Q INDEPENDIENTE de este semaforo
+        # (antes se cargaba por error la tabla compartida vieja
+        # 'q_table_sumo.pkl' para los cinco, lo que NO evaluaba
+        # los modelos entrenados en train_sumo_5.py).
+        archivo_modelo = f"q_table_independiente_{tls_id}.pkl"
+        agente.load(archivo_modelo)
 
         if not agente.q_table:
             raise RuntimeError(
-                "La tabla Q original esta vacia. "
-                "Ejecuta primero train_sumo.py."
+                f"La tabla Q de {archivo_modelo} esta vacia. "
+                "Ejecuta primero train_sumo_5.py."
             )
 
         # En esta simulacion solo explotamos
-        # los conocimientos ya entrenados.
+        # los conocimientos ya entrenados (sin exploracion).
         agente.epsilon = 0
 
         agentes[tls_id] = agente
-
-        # Guardar una copia independiente.
-        archivo_modelo = f"q_table_{tls_id}.pkl"
-        agente.save(archivo_modelo)
 
         estadisticas[tls_id] = {
             "decisiones": 0,
