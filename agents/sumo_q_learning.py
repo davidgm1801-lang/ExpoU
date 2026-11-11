@@ -10,7 +10,8 @@ class QLearningAgent:
         discount_factor=0.95,
         epsilon=1.0,
         epsilon_min=0.05,
-        epsilon_decay=0.995
+        epsilon_decay=0.995,
+        queue_thresholds=None
     ):
 
         self.alpha = learning_rate
@@ -19,24 +20,38 @@ class QLearningAgent:
         self.epsilon_min = epsilon_min
         self.epsilon_decay = epsilon_decay
 
+        # Umbrales para discretizar la cola. Cada valor marca el limite
+        # SUPERIOR (inclusive) de una categoria; una cola mayor que el
+        # ultimo umbral cae en la categoria final.
+        #
+        # Por defecto se reproduce EXACTAMENTE la discretizacion original
+        # de 3 niveles:
+        #   cola == 0        -> 0
+        #   1 <= cola <= 3   -> 1
+        #   cola > 3         -> 2
+        # que equivale a los umbrales [0, 3].
+        #
+        # La Etapa 3 (Parte B) prueba una discretizacion mas fina pasando
+        # otros umbrales, p. ej. [0, 2, 5, 10] -> 5 niveles.
+        if queue_thresholds is None:
+            queue_thresholds = [0, 3]
+        self.queue_thresholds = queue_thresholds
+
         self.q_table = {}
 
+    def classify_queue(self, queue):
+        # Devuelve el indice de la primera categoria cuyo umbral
+        # superior no es rebasado por la cola; si los rebasa todos,
+        # devuelve la categoria final.
+        for i, limite in enumerate(self.queue_thresholds):
+            if queue <= limite:
+                return i
+        return len(self.queue_thresholds)
+
     def get_state(self, queue_a, queue_b, green_group):
-
-        def classify_queue(queue):
-
-            if queue == 0:
-                return 0
-
-            elif queue <= 3:
-                return 1
-
-            else:
-                return 2
-
         return (
-            classify_queue(queue_a),
-            classify_queue(queue_b),
+            self.classify_queue(queue_a),
+            self.classify_queue(queue_b),
             green_group
         )
 
