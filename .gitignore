@@ -30,6 +30,9 @@ venv/
 # tambien se versionan como respaldo/evidencia del experimento.
 !q_table_v2_*.pkl
 
+# Modelos coordinados (Etapa 4, estado con presion de vecino): se versionan.
+!q_table_coord_*.pkl
+
 # ==================================================
 # SALIDAS TEMPORALES DE SIMULACIONES DE SUMO
 # ==================================================
