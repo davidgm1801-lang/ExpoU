@@ -40,6 +40,9 @@ venv/
 !q_table_gen_*.pkl
 !q_table_coord6_*.pkl
 
+# Modelos del sistema generico COORDINADO (18, cobertura + coordinacion).
+!q_table_gencoord_*.pkl
+
 # ==================================================
 # SALIDAS TEMPORALES DE SIMULACIONES DE SUMO
 # ==================================================

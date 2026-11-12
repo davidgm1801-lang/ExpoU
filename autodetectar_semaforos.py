@@ -77,23 +77,29 @@ def detectar():
             # Enlaces controlados: indice de senal -> lista de (entrada, salida, via)
             enlaces = traci.trafficlight.getControlledLinks(tls_id)
 
-            grupos = []  # cada grupo: {"fase": i, "carriles": [...]}
+            grupos = []  # cada grupo: {"fase": i, "carriles": [...], "salidas": [...]}
             for i, fase in enumerate(fases):
                 if not es_fase_verde(fase.state):
                     continue
                 carriles = set()
+                salidas = set()  # edges hacia los que vierte este grupo
                 for idx, ch in enumerate(fase.state):
                     if ch in "Gg" and idx < len(enlaces):
                         for conexion in enlaces[idx]:
                             entrada = conexion[0]
+                            salida = conexion[1]
                             # descartar carriles internos de interseccion
                             if entrada and not entrada.startswith(":"):
                                 if entrada in carriles_red:
                                     carriles.add(entrada)
+                            # edge de salida (sin el sufijo _carril)
+                            if salida and not salida.startswith(":"):
+                                salidas.add(salida.rsplit("_", 1)[0])
                 if carriles:
                     grupos.append({
                         "fase": i,
                         "carriles": sorted(carriles),
+                        "salidas": sorted(salidas),
                     })
 
             # Necesitamos al menos 2 grupos verdes para que el agente
@@ -115,11 +121,43 @@ def detectar():
     finally:
         traci.close()
 
+    # ==================================================
+    # CALCULAR VECINDAD (para coordinacion)
+    # ==================================================
+    # Para cada grupo de cada semaforo, ver si sus 'salidas' coinciden
+    # con los carriles de ENTRADA de otro semaforo controlado. Si es
+    # asi, ese grupo "alimenta" a ese vecino.
+    #
+    # edge de entrada -> tls que lo controla
+    edge_entrada_de = {}
+    for tid, datos in config.items():
+        for g in datos["grupos"]:
+            for carril in g["carriles"]:
+                edge_entrada_de[carril.rsplit("_", 1)[0]] = tid
+
+    n_relaciones = 0
+    for tid, datos in config.items():
+        for g in datos["grupos"]:
+            vecinos = set()
+            for edge_salida in g["salidas"]:
+                vecino = edge_entrada_de.get(edge_salida)
+                if vecino is not None and vecino != tid:
+                    vecinos.add(vecino)
+            # Guardar el vecino principal del grupo (si hay). Si vierte a
+            # varios, se guarda el primero de forma estable; la senal de
+            # coordinacion solo necesita "hay un vecino que puede saturarse".
+            g["vecino"] = sorted(vecinos)[0] if vecinos else None
+            if g["vecino"]:
+                n_relaciones += 1
+            # 'salidas' ya no se necesita en el JSON final
+            del g["salidas"]
+
     with open(ARCHIVO_SALIDA, "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
 
     print("\n" + "=" * 64)
     print(f"Semaforos CONTROLABLES detectados: {len(config)}")
+    print(f"Relaciones de vecindad detectadas (grupos con vecino): {n_relaciones}")
     print(f"Guardado en: {ARCHIVO_SALIDA}")
     if descartados:
         print(f"\nDescartados ({len(descartados)}):")
