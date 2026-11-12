@@ -33,6 +33,9 @@ venv/
 # Modelos coordinados (Etapa 4, estado con presion de vecino): se versionan.
 !q_table_coord_*.pkl
 
+# Modelos coordinados escalados (Etapa 6, 10 semaforos): se versionan.
+!q_table_coord10_*.pkl
+
 # ==================================================
 # SALIDAS TEMPORALES DE SIMULACIONES DE SUMO
 # ==================================================

@@ -28,6 +28,7 @@ import traci
 import sumolib
 
 from agents.coordinated_agent import CoordinatedQLearningAgent
+from config_semaforos import SEMAFOROS, VECINO_DESTINO, archivos_modelo
 
 
 # ==================================================
@@ -46,43 +47,21 @@ TIEMPO_MINIMO_VERDE = 10
 TIEMPO_MAXIMO_VERDE = 50
 UMBRAL_PRESION_VECINO = 4
 
-ARCHIVO_RESULTADOS = "evaluacion_coordinado.csv"
+# (ARCHIVO_RESULTADOS se define mas abajo, junto al prefijo de modelos.)
 DIR_SALIDAS = "salidas_evaluacion"
 
 
-SEMAFOROS = {
-    "262567760": {
-        "A": ["1083001223#0_0", "1083001223#0_1"],
-        "B": ["862794316#0_0", "862794316#0_1"],
-    },
-    "262567775": {
-        "A": ["88757025#0_0", "88757025#0_1"],
-        "B": ["1083001225#0_1", "1083001225#0_2"],
-    },
-    "262567777": {
-        "A": ["1060493360#3_1", "1060493360#3_2"],
-        "B": ["908369205#0_0", "908369205#0_1"],
-    },
-    "264377450": {
-        "A": ["1083001233_0", "1083001233_1"],
-        "B": ["1056806207#0_0", "1056806207#0_1"],
-    },
-    "265804326": {
-        "A": ["88877450#2_0", "88877450#2_1"],
-        "B": ["1083001234#0_0", "1083001234#0_1"],
-    },
-}
-
-ARCHIVOS_MODELO = {
-    tls_id: f"q_table_coord_{tls_id}.pkl"
-    for tls_id in SEMAFOROS
-}
-
-VECINO_DESTINO = {
-    "262567760": {"A": ("262567775", "A")},
-    "262567777": {"A": ("262567775", "B")},
-    "264377450": {"B": ("265804326", "B")},
-}
+# SEMAFOROS y VECINO_DESTINO se importan de config_semaforos.py
+# (fuente unica; escalar = editar ese archivo).
+# El prefijo de los modelos debe coincidir con el usado al entrenar
+# (PREFIJO_COORD). Por defecto "q_table_coord_".
+PREFIJO_COORD = os.environ.get("PREFIJO_COORD", "q_table_coord_")
+ARCHIVOS_MODELO = archivos_modelo(PREFIJO_COORD)
+ARCHIVO_RESULTADOS = (
+    "evaluacion_coordinado.csv"
+    if PREFIJO_COORD == "q_table_coord_"
+    else f"evaluacion_{PREFIJO_COORD.rstrip('_')}.csv"
+)
 
 
 # ==================================================
