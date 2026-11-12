@@ -36,6 +36,10 @@ venv/
 # Modelos coordinados escalados (Etapa 6, 10 semaforos): se versionan.
 !q_table_coord10_*.pkl
 
+# Modelos del sistema generico (19 intersecciones): se versionan.
+!q_table_gen_*.pkl
+!q_table_coord6_*.pkl
+
 # ==================================================
 # SALIDAS TEMPORALES DE SIMULACIONES DE SUMO
 # ==================================================
