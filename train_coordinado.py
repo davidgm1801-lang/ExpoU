@@ -42,6 +42,7 @@ import traci
 import sumolib
 
 from agents.coordinated_agent import CoordinatedQLearningAgent
+from config_semaforos import SEMAFOROS, VECINO_DESTINO, archivos_modelo
 
 
 # ==================================================
@@ -64,57 +65,28 @@ TIEMPO_MAXIMO_VERDE = 50
 # Umbral de cola del vecino para considerarlo "congestionado".
 UMBRAL_PRESION_VECINO = 4
 
-ARCHIVO_CSV = "resultados_entrenamiento_coord.csv"
+# (ARCHIVO_CSV se define mas abajo, junto al prefijo de los modelos.)
 
 
 # ==================================================
-# SEMAFOROS Y CARRILES (verificados en Etapa 1)
+# SEMAFOROS Y TOPOLOGIA
 # ==================================================
+# Se importan de config_semaforos.py (fuente unica). Para escalar a mas
+# intersecciones basta editar ese archivo; este entrenador no cambia.
 
-SEMAFOROS = {
-    "262567760": {
-        "A": ["1083001223#0_0", "1083001223#0_1"],
-        "B": ["862794316#0_0", "862794316#0_1"],
-    },
-    "262567775": {
-        "A": ["88757025#0_0", "88757025#0_1"],
-        "B": ["1083001225#0_1", "1083001225#0_2"],
-    },
-    "262567777": {
-        "A": ["1060493360#3_1", "1060493360#3_2"],
-        "B": ["908369205#0_0", "908369205#0_1"],
-    },
-    "264377450": {
-        "A": ["1083001233_0", "1083001233_1"],
-        "B": ["1056806207#0_0", "1056806207#0_1"],
-    },
-    "265804326": {
-        "A": ["88877450#2_0", "88877450#2_1"],
-        "B": ["1083001234#0_0", "1083001234#0_1"],
-    },
-}
+# Prefijo de los modelos. Por defecto "q_table_coord_" (los 5 de la
+# Etapa 4). Si se controla un conjunto distinto (p. ej. 10 semaforos),
+# conviene usar otro prefijo para NO sobrescribir los modelos previos.
+# Se ajusta con la variable de entorno PREFIJO_COORD.
+PREFIJO_COORD = os.environ.get("PREFIJO_COORD", "q_table_coord_")
+ARCHIVOS_MODELO = archivos_modelo(PREFIJO_COORD)
 
-ARCHIVOS_MODELO = {
-    tls_id: f"q_table_coord_{tls_id}.pkl"
-    for tls_id in SEMAFOROS
-}
-
-# ==================================================
-# TOPOLOGIA DE VECINDAD
-# ==================================================
-# Para cada semaforo, por grupo (A/B), indica a que VECINO alimenta ese
-# grupo (y en que grupo del vecino cae el trafico). Si un grupo no
-# alimenta a ningun vecino monitoreado, no aparece.
-#
-# Fuente: cruce salidas/entradas de getControlledLinks (Etapa 1).
-#   262567760 grupo A --> 262567775 (su grupo A)
-#   262567777 grupo A --> 262567775 (su grupo B)
-#   264377450 grupo B --> 265804326 (su grupo B)
-VECINO_DESTINO = {
-    "262567760": {"A": ("262567775", "A")},
-    "262567777": {"A": ("262567775", "B")},
-    "264377450": {"B": ("265804326", "B")},
-}
+# El CSV de resultados acompaña al prefijo para no mezclar corridas.
+ARCHIVO_CSV = (
+    "resultados_entrenamiento_coord.csv"
+    if PREFIJO_COORD == "q_table_coord_"
+    else f"resultados_entrenamiento_{PREFIJO_COORD.rstrip('_')}.csv"
+)
 
 
 # ==================================================
