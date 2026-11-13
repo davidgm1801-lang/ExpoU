@@ -19,6 +19,9 @@ Permite ELEGIR el controlador y COMPARAR:
   # Comparar ambos (corre fijo e IA, sin ventana, e imprime la tabla)
   python .\\demo_coordinado.py --modo comparar
 
+  # DUAL: dos ventanas simultaneas (fijo e IA en paralelo, mismo trafico)
+  python .\\demo_coordinado.py --modo dual
+
 Opciones utiles:
   --semilla 42      semilla de trafico (por defecto 42)
   --delay 80        milisegundos entre pasos en la ventana (ritmo visual)
@@ -288,12 +291,110 @@ def imprimir_metricas(titulo, m):
 
 
 # ==================================================
+# MODO DUAL: DOS VENTANAS SIMULTANEAS (fijo vs IA)
+# ==================================================
+# Abre DOS instancias de SUMO-GUI a la vez (misma semilla = mismo
+# trafico) usando conexiones TraCI ETIQUETADAS. Una ventana corre el
+# semaforo fijo y la otra la IA coordinada, avanzando en paralelo paso
+# a paso. Asi se ve en vivo la diferencia sobre el mismo trafico.
+
+ETQ_FIJO = "sim_fijo"
+ETQ_IA = "sim_ia"
+
+
+def correr_dual(semilla, delay):
+    SUMO_GUI = sumolib.checkBinary("sumo-gui")
+
+    # Verificar modelos antes de abrir nada.
+    for tls_id in SEMAFOROS:
+        if not os.path.exists(ARCHIVOS_MODELO[tls_id]):
+            print(f"ERROR: falta el modelo {ARCHIVOS_MODELO[tls_id]}. "
+                  "Entrena con train_coordinado.py.")
+            sys.exit(1)
+
+    def comando(prefijo):
+        return [
+            SUMO_GUI, "-c", CONFIG,
+            "--end", str(DURACION),
+            "--seed", str(semilla),
+            "--scale", ESCALA_TRAFICO,
+            "--no-step-log", "true",
+            "--duration-log.statistics", "true",
+            "--tripinfo-output", f"demo_dual_{prefijo}_tripinfos.xml",
+            "--statistic-output", f"demo_dual_{prefijo}_stats.xml",
+            "--start", "--delay", str(delay), "--quit-on-end",
+        ]
+
+    # Arrancar las dos simulaciones con etiquetas distintas.
+    traci.start(comando("fijo"), label=ETQ_FIJO)
+    traci.start(comando("ia"), label=ETQ_IA)
+
+    # Instalar la IA solo en la ventana de IA.
+    agentes, controles = {}, {}
+    traci.switch(ETQ_IA)
+    for tls_id in SEMAFOROS:
+        agentes[tls_id] = AgenteDemo(ARCHIVOS_MODELO[tls_id])
+        controles[tls_id] = {}
+        instalar_ia(tls_id, controles[tls_id])
+
+    print("\nDos ventanas abiertas: IZQUIERDA/una = FIJO, otra = IA.")
+    print("Colocalas lado a lado. Avanzando en paralelo...\n")
+
+    try:
+        while True:
+            # ¿siguen vivas ambas?
+            traci.switch(ETQ_FIJO)
+            fijo_vivo = (traci.simulation.getTime() < DURACION
+                         and traci.simulation.getMinExpectedNumber() > 0)
+            traci.switch(ETQ_IA)
+            ia_vivo = (traci.simulation.getTime() < DURACION
+                       and traci.simulation.getMinExpectedNumber() > 0)
+            if not (fijo_vivo or ia_vivo):
+                break
+
+            # Avanzar la ventana FIJO (sin control).
+            if fijo_vivo:
+                traci.switch(ETQ_FIJO)
+                traci.simulationStep()
+
+            # Avanzar la ventana IA y aplicar el control.
+            if ia_vivo:
+                traci.switch(ETQ_IA)
+                traci.simulationStep()
+                for tls_id in SEMAFOROS:
+                    controlar_ia(tls_id, agentes[tls_id], controles[tls_id])
+    finally:
+        for etq in (ETQ_FIJO, ETQ_IA):
+            try:
+                traci.switch(etq)
+                traci.close()
+            except Exception:
+                pass
+
+    m_fijo = leer_metricas("demo_dual_fijo_tripinfos.xml",
+                           "demo_dual_fijo_stats.xml")
+    m_ia = leer_metricas("demo_dual_ia_tripinfos.xml",
+                         "demo_dual_ia_stats.xml")
+    imprimir_metricas("SEMAFORO FIJO (baseline)", m_fijo)
+    imprimir_metricas("IA COORDINADA", m_ia)
+    print("\n" + "=" * 60)
+    print("COMPARACION (IA - fijo):")
+    print(f"  Completados : {m_ia['completados'] - m_fijo['completados']:+d} "
+          "(mas = mejor)")
+    print(f"  Espera (s)  : {m_ia['espera'] - m_fijo['espera']:+.1f} "
+          "(menos = mejor)")
+    print(f"  Teleports   : {m_ia['teleports'] - m_fijo['teleports']:+d} "
+          "(menos = mejor)")
+    print("=" * 60)
+
+
+# ==================================================
 # PRINCIPAL
 # ==================================================
 
 def main():
     ap = argparse.ArgumentParser(description="Demo ExpoU: IA coordinada vs fijo")
-    ap.add_argument("--modo", choices=["ia", "fijo", "comparar"],
+    ap.add_argument("--modo", choices=["ia", "fijo", "comparar", "dual"],
                     default="ia", help="controlador a demostrar")
     ap.add_argument("--semilla", type=int, default=42)
     ap.add_argument("--delay", type=int, default=80,
@@ -322,6 +423,10 @@ def main():
         print(f"  Teleports   : {m_ia['teleports'] - m_fijo['teleports']:+d} "
               "(menos = mejor)")
         print("=" * 60)
+    elif args.modo == "dual":
+        print("Modo DUAL: dos ventanas SUMO-GUI simultaneas "
+              f"(semilla {args.semilla}).")
+        correr_dual(args.semilla, args.delay)
     else:
         usar_gui = not args.sin_gui
         etiqueta = ("IA COORDINADA" if args.modo == "ia"
