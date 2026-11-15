@@ -1,3 +1,12 @@
+# Dependencias de Python de ExpoU.
+#
+# IMPORTANTE: traci y sumolib NO se instalan aqui: vienen incluidas con SUMO.
+# Instala SUMO (https://eclipse.dev/sumo/) y configura SUMO_HOME antes de correr.
+# Ver README.md, seccion "Requisitos".
+
+# Analisis y utilidades
 numpy>=1.24
-pygame>=2.5
 matplotlib>=3.7
+
+# Solo para la visualizacion del prototipo original de 1 interseccion
+pygame>=2.5

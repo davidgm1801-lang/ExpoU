@@ -1,82 +1,153 @@
-# 🚦 Semáforo Inteligente con Aprendizaje por Refuerzo
+# 🚦 ExpoU — Control inteligente y coordinado de semáforos (Bogotá)
 
-Sistema de control adaptativo de semáforos que usa **Q-Learning** para decidir
-cuándo cambiar las luces según la cantidad de vehículos esperando en cada
-dirección. El objetivo: que nadie espere en una intersección vacía.
+Sistema **multiagente de aprendizaje por refuerzo (Q-Learning)** que controla
+semáforos de forma adaptativa y **coordinada** sobre una red real de Bogotá
+simulada en **SUMO**. Cada semáforo es un agente que aprende cuándo cambiar la
+luz verde para reducir las colas, y se coordina con sus vecinos para no propagar
+atascos.
 
-Incluye una **simulación** de una intersección de 4 vías, un **agente de RL**
-que aprende la política de control, un **baseline de tiempo fijo** para comparar,
-y una **visualización en vivo** con Pygame.
+**Resultado principal:** los 5 agentes coordinados **superan al semáforo de
+tiempo fijo** en viajes completados, espera y congestión, de forma consistente.
+Ver [`RESULTADOS.md`](RESULTADOS.md) y [`MVP.md`](MVP.md).
 
-## Resultados
+| Métrica (demo, semilla 42) | Semáforo fijo | IA coordinada |
+|---|---:|---:|
+| Vehículos completados | 2418 | **2661** (+243) |
+| Espera promedio (s) | 291.9 | **282.0** |
+| Teleports (atascos) | 972 | **775** (−197) |
 
-Tras entrenar ~1500 episodios, el agente RL frente al semáforo tradicional:
+---
 
-| Métrica                      | Tiempo Fijo | RL      |
-|------------------------------|-------------|---------|
-| Carros esperando / paso      | 4.07        | **2.12** |
-| Carros atendidos / episodio  | 275.4       | **281.4** |
-| Cola máxima observada        | 10          | **6**   |
+## Requisitos
 
-➡️ **~48% menos de espera promedio.** La IA aprende sola a dar más verde al
-eje con más demanda, sin reglas programadas a mano.
+Este proyecto NO corre solo con `pip install`. Necesita **SUMO**, un simulador de
+tráfico de código abierto.
 
-## Instalación
+### 1. Instalar SUMO (obligatorio)
+- Descarga SUMO 1.28.0 (o compatible) desde https://eclipse.dev/sumo/
+- En Windows, el instalador lo deja normalmente en
+  `C:\Program Files (x86)\Eclipse\Sumo` (o similar).
+- Verifica la instalación abriendo una terminal y ejecutando: `sumo --version`
+- Define la variable de entorno **`SUMO_HOME`** apuntando a la carpeta de SUMO
+  (el instalador de Windows suele hacerlo automáticamente). Las librerías
+  `traci` y `sumolib` vienen incluidas con SUMO.
 
-```bash
-pip install -r requirements.txt
+### 2. Python
+- Python 3.10+ recomendado.
+- Crea y activa un entorno virtual:
+  ```powershell
+  python -m venv .venv
+  .\.venv\Scripts\Activate.ps1      # Windows PowerShell
+  # source .venv/bin/activate       # Linux/Mac
+  ```
+- Instala dependencias:
+  ```powershell
+  pip install -r requirements.txt
+  ```
+
+> `traci` y `sumolib` NO se instalan con pip: vienen con SUMO. Si al correr un
+> script ves `ModuleNotFoundError: No module named 'traci'`, revisa que SUMO esté
+> instalado y que `SUMO_HOME` esté configurado.
+
+---
+
+## Cómo verlo funcionar (demo)
+
+La solución ganadora son los **5 agentes coordinados** (modelos
+`q_table_coord_*.pkl`, ya incluidos en el repo).
+
+```powershell
+# Demo con DOS ventanas simultaneas: semaforo fijo vs IA coordinada
+python .\demo_coordinado.py --modo dual
+
+# Solo IA coordinada (una ventana)
+python .\demo_coordinado.py --modo ia
+
+# Solo semaforo fijo (una ventana)
+python .\demo_coordinado.py --modo fijo
+
+# Sin ventanas: corre ambos e imprime la tabla de metricas (rapido)
+python .\demo_coordinado.py --modo comparar
 ```
 
-## Uso
+Opciones: `--semilla 42`, `--delay 80` (ritmo visual), `--sin-gui`.
 
-```bash
-# 1. Entrenar el agente (genera q_table.pkl)
-python train.py --episodes 2000
+---
 
-# 2. Comparar RL vs semáforo fijo (métricas numéricas)
-python evaluate.py --episodes 200
+## Reproducir el entrenamiento y la evaluación
 
-# 3. Ver la simulación en vivo
-python visualize.py
+```powershell
+# Entrenar los 5 agentes coordinados (regenera q_table_coord_*.pkl)
+python .\train_coordinado.py
+
+# Evaluar coordinado vs baseline (5 semillas, sin ventana)
+python .\evaluar_coordinado.py
+
+# Tabla comparativa de las configuraciones probadas
+python .\comparar_resultados.py
 ```
 
-**Controles de la visualización:**
-`ESPACIO` cambia entre RL y Tiempo Fijo · `R` reinicia · `+/-` velocidad · `ESC` salir.
+Sistema que cubre TODAS las intersecciones controlables (experimental):
+```powershell
+python .\autodetectar_semaforos.py      # genera la config de la red
+python .\train_generico_coord.py        # entrena agentes coordinados genericos
+python .\evaluar_generico_coord.py       # evalua
+```
 
-## Cómo funciona el RL
+---
 
-El problema se modela como un proceso de decisión de Markov:
+## Cómo funciona (resumen)
 
-- **Estado:** nivel de cola en el eje Norte-Sur y Este-Oeste (discretizado),
-  fase actual, si hay amarillo, y tiempo en la fase actual.
-- **Acciones:** `mantener` la fase verde o `cambiar` a la otra.
-- **Recompensa:** negativa proporcional al total de carros esperando
-  (minimizarla = minimizar la espera).
-- **Algoritmo:** Q-Learning tabular con política epsilon-greedy.
+- **Estado:** nivel de cola de cada grupo de carriles + qué grupo tiene verde
+  (discretizado). En la versión coordinada se añade la **presión del vecino**.
+- **Acciones:** mantener el verde o cambiarlo.
+- **Recompensa:** negativa, proporcional a los vehículos detenidos; la versión
+  coordinada penaliza además alimentar a un vecino saturado.
+- **Algoritmo:** Q-Learning tabular con política ε-greedy.
 
-Se usa Q-Learning tabular (no deep RL) porque el espacio de estados es pequeño,
-entrena en segundos y la tabla aprendida es **inspeccionable**.
+Detalles de diseño en [`ARQUITECTURA.md`](ARQUITECTURA.md).
 
-## Estructura
+---
+
+## Documentación del proyecto
+
+| Documento | Contenido |
+|---|---|
+| [`MVP.md`](MVP.md) | Qué hace, para qué, diferencial frente a Bogotá, funcionalidades |
+| [`RESULTADOS.md`](RESULTADOS.md) | Resultado principal y narrativa por etapas |
+| [`ARQUITECTURA.md`](ARQUITECTURA.md) | Arquitectura (3 niveles) y mapa de archivos |
+| [`DIAGNOSTICO_ETAPA1.md`](DIAGNOSTICO_ETAPA1.md) | Diagnóstico de demanda y carriles |
+| [`EVALUACION_ETAPA2.md`](EVALUACION_ETAPA2.md) | Evaluación IA local vs baseline |
+| [`ETAPA3_CAUSA_RAIZ.md`](ETAPA3_CAUSA_RAIZ.md) | Causa de la inestabilidad |
+| [`ESCALABILIDAD_ETAPA6.md`](ESCALABILIDAD_ETAPA6.md) | Escalar a más intersecciones |
+| [`SISTEMA_19.md`](SISTEMA_19.md) | Sistema genérico para toda la red |
+
+---
+
+## Estructura (archivos clave)
 
 ```
-traffic_rl/
-├── simulation/
-│   ├── intersection.py   # Entorno estilo Gym (reset/step)
-│   └── config.py         # Parámetros ajustables
+ExpoU/
 ├── agents/
-│   ├── q_learning.py     # Agente de RL
-│   └── fixed_timer.py    # Baseline de tiempo fijo
-├── train.py              # Entrenamiento
-├── evaluate.py           # Comparación RL vs fijo
-└── visualize.py          # Simulación visual (Pygame)
+│   ├── sumo_q_learning.py            # agente local
+│   ├── coordinated_agent.py          # agente coordinado (presion de vecino)
+│   ├── generic_agent.py              # agente generico (N grupos)
+│   └── generic_coordinated_agent.py  # generico + coordinacion
+├── train_coordinado.py / evaluar_coordinado.py   # solucion ganadora (5)
+├── demo_coordinado.py                # demo visual (fijo vs IA)
+├── autodetectar_semaforos.py         # configura la red automaticamente
+├── config_semaforos.py               # configuracion centralizada
+├── comparar_resultados.py            # tabla comparativa de resultados
+├── q_table_coord_*.pkl               # modelos entrenados ganadores
+├── sumo_bogota/                      # red de Bogota (SUMO)
+└── *.md                              # documentacion
 ```
 
-## Próximos pasos (Opción B)
+---
 
-- **Visión por computadora:** reemplazar los contadores simulados por conteos
-  reales de vehículos/peatones detectados con YOLO sobre video de cámara.
-- **Deep RL (DQN):** manejar estados continuos / más complejos sin discretizar.
-- **Peatones:** añadir cola de peatones con su propia fase y prioridad.
-- **Múltiples intersecciones:** coordinar una red de semáforos (RL multiagente).
-```
+## Limitaciones
+
+- Prueba de concepto en **simulación** (SUMO), no un despliegue real.
+- La mejora validada es sobre 5-6 intersecciones coordinadas en corredores.
+- Los *teleports* son una limitación del simulador (vehículos muy atascados que
+  SUMO reubica), no del controlador; se reportan siempre para no inflar métricas.
